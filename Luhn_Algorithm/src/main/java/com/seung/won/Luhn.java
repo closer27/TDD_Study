@@ -10,53 +10,51 @@ package com.seung.won;
 public class Luhn {
     private String cardStr;
     private int[] cardChars;
-    private int checksum;
 
     public Luhn() {
-        checksum = 0;
+
     }
     public Luhn(String card){
         cardStr = card;
-        checksum = 0;
         cardChars = new int[16];
-    }
-
-
-    public int getLength() {
-        return cardStr.length();
-    }
-
-    public void intoArray() {
-        for (int i=0; i<cardStr.length(); i++)
+        for (int i=0; i<cardStr.length(); i++) {
             cardChars[i] = Integer.parseInt(String.valueOf(cardStr.charAt(i)));
+        }
     }
 
     public boolean isValid() {
-        if(getLength() != 16) return false;
+        if(cardStr.length() != 16) return false;
 
-        for (int i=14; i>0; i--) {
-            if ((i+1)%2 == 0) {  // 짝수일 때
-                int temp = cardChars[i] * 2;
-                if (temp >= 10)
-                    checksum += (temp/10) + (temp%10);
-                else
-                    checksum += temp;
-            }
-            else {
-                checksum += cardChars[i];
-            }
-        }
-        System.out.printf("checksum is : %d\n", checksum);
-
-        int ceilingSum = (checksum/10 + 1) * 10;
-
-        System.out.printf("Celing Sum is : %d\n", ceilingSum);
-
-        if ((ceilingSum-checksum)%10 != cardChars[15]) {
+        if (getChecksum(getSum()) != cardChars[15]) {
             System.out.println("is not correct\n");
             return false;
         }
 
-        return true;  //To change body of created methods use File | Settings | File Templates.
+        return true;
+    }
+
+    private int getSum() {
+        int sum = 0;
+        for (int i=0; i<15; i++) {
+            if (i%2 == 0) {  // 짝수일 때
+                sum += getSumEven(i);
+            }
+            else {
+                sum += cardChars[i];
+            }
+        }
+        return sum;
+    }
+
+    private int getSumEven(int i) {
+        int temp = cardChars[i] * 2;
+        if (temp >= 10)
+            temp = (temp/10) + (temp%10);
+        return temp;
+    }
+
+    private int getChecksum(int sum) {
+        int checksum = 10 - (sum % 10);
+        return checksum;
     }
 }
