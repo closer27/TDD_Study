@@ -17,4 +17,11 @@ public class LuhnTest {
 
         Assert.assertEquals(true, luhn.isValid());
     }
+
+    @Test
+    public void isValidAnother() {
+        Luhn luhn = new Luhn("6060452945045018");
+
+        Assert.assertEquals(true, luhn.isValid());
+    }
 }

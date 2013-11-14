@@ -36,8 +36,8 @@ public class Luhn {
     private int getSum() {
         int sum = 0;
         for (int i=0; i<15; i++) {
-            if (i%2 == 0) {  // 짝수일 때
-                sum += getSumEven(i);
+            if (i%2 == 0) {  // even
+                sum += getSumOdd(i);
             }
             else {
                 sum += cardChars[i];
@@ -46,7 +46,7 @@ public class Luhn {
         return sum;
     }
 
-    private int getSumEven(int i) {
+    private int getSumOdd(int i) {
         int temp = cardChars[i] * 2;
         if (temp >= 10)
             temp = (temp/10) + (temp%10);
