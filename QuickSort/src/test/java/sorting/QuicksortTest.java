@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,5 +43,21 @@ public class QuicksortTest {
         Quicksort quicksort = new Quicksort(array);
 
         Assert.assertEquals((Object) 0, quicksort.getLastObject());
+    }
+
+    @Test
+    public void objOfIdxTest() {
+        List<Integer> array = Arrays.asList(12, 32, 42, 36, 539, 13, 25, 38);
+        Quicksort quicksort = new Quicksort(array);
+
+        Assert.assertEquals((Object) 32, quicksort.getObjectOfIndex(3));
+    }
+
+    @Test
+    public void indexOfElemTest() {
+        List<Integer> array = Arrays.asList(12, 32, 42, 36, 539, 13, 25, 38);
+        Quicksort quicksort = new Quicksort(array);
+
+        Assert.assertEquals(7, quicksort.getIndexOfElements(Integer.valueOf(539)));
     }
 }
