@@ -34,7 +34,6 @@ public class Quicksort {
         for (int e : arrayList) {
             if (e < pivot) lessList.add(e);
             else if (e > pivot) greaterList.add(e);
-            else { }
         }
         pivotList.add(pivot);
 
